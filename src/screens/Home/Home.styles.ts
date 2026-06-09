@@ -1,3 +1,4 @@
+// src/features/pokemon/screens/Home/Home.styles.ts
 import { StyleSheet } from 'react-native';
 import { AppTheme } from '@/theme/colors';
 
@@ -17,16 +18,6 @@ export const createHomeStyles = (theme: AppTheme) => {
       fontSize: 32,
       fontWeight: '800',
       marginBottom: 12,
-    },
-    searchInput: {
-      height: 48,
-      borderRadius: 14,
-      borderWidth: 1,
-      borderColor: theme.border,
-      backgroundColor: theme.input,
-      color: theme.text,
-      paddingHorizontal: 16,
-      fontSize: 16,
     },
     listContent: {
       paddingBottom: 24,
