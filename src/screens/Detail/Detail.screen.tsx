@@ -1,9 +1,154 @@
-import { Text, View } from 'react-native';
-
-export const DetailScreen = () => {
-  return (
-    <View>
-      <Text>Detail</Text>
-    </View>
-  );
-};
+import {
+    ActivityIndicator,
+    Image,
+    RefreshControl,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
+  } from 'react-native';
+  import { useAppTheme } from '@/theme/useAppTheme';
+  import { createDetailStyles } from './Detail.styles';
+  import { useDetailController } from './Detail.controller';
+import { capitalize } from '@/utils/pokemon.utils';
+  
+  const MAX_STAT_VALUE = 150;
+  
+  export const DetailScreen = () => {
+    const theme = useAppTheme();
+    const styles = createDetailStyles(theme);
+  
+    const {
+      t,
+      pokemon,
+      image,
+      types,
+      abilities,
+      stats,
+      isLoading,
+      isError,
+      isRefetching,
+      errorMessage,
+      handleRefresh,
+    } = useDetailController();
+  
+    if (isLoading) {
+      return (
+        <View style={styles.centerContent}>
+          <ActivityIndicator size="large" color={theme.primary} />
+          <Text style={styles.messageText}>{t('common.loading')}</Text>
+        </View>
+      );
+    }
+  
+    if (isError || !pokemon) {
+      return (
+        <View style={styles.centerContent}>
+          <Text style={styles.errorTitle}>{t('common.error')}</Text>
+          <Text style={styles.messageText}>{errorMessage}</Text>
+  
+          <TouchableOpacity style={styles.retryButton} onPress={handleRefresh}>
+            <Text style={styles.retryButtonText}>{t('common.retry')}</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  
+    return (
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.content}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefetching}
+            onRefresh={handleRefresh}
+            tintColor={theme.primary}
+          />
+        }
+      >
+        <View style={styles.heroCard}>
+          <Image source={{ uri: image }} style={styles.image} />
+  
+          <Text style={styles.pokemonNumber}>
+            #{String(pokemon.id).padStart(3, '0')}
+          </Text>
+  
+          <Text style={styles.pokemonName}>{capitalize(pokemon.name)}</Text>
+        </View>
+  
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t('detail.types')}</Text>
+  
+          <View style={styles.chipContainer}>
+            {types.map(type => (
+              <View key={type} style={styles.chip}>
+                <Text style={styles.chipText}>{type}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+  
+        <View style={styles.section}>
+          <View style={styles.infoGrid}>
+            <View style={styles.infoItem}>
+              <Text style={styles.infoLabel}>{t('detail.height')}</Text>
+              <Text style={styles.infoValue}>{pokemon.height}</Text>
+            </View>
+  
+            <View style={styles.infoItem}>
+              <Text style={styles.infoLabel}>{t('detail.weight')}</Text>
+              <Text style={styles.infoValue}>{pokemon.weight}</Text>
+            </View>
+  
+            <View style={styles.infoItem}>
+              <Text style={styles.infoLabel}>{t('detail.baseExperience')}</Text>
+              <Text style={styles.infoValue}>{pokemon.base_experience}</Text>
+            </View>
+          </View>
+        </View>
+  
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t('detail.abilities')}</Text>
+  
+          <View style={styles.chipContainer}>
+            {abilities.map(ability => (
+              <View key={ability} style={styles.chip}>
+                <Text style={styles.chipText}>{ability}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+  
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t('detail.stats')}</Text>
+  
+          {stats.map(stat => {
+            const widthPercentage = Math.min(
+              (stat.value / MAX_STAT_VALUE) * 100,
+              100
+            );
+  
+            return (
+              <View key={stat.name} style={styles.statRow}>
+                <View style={styles.statHeader}>
+                  <Text style={styles.statName}>{stat.name}</Text>
+                  <Text style={styles.statValue}>{stat.value}</Text>
+                </View>
+  
+                <View style={styles.statBarBackground}>
+                  <View
+                    style={[
+                      styles.statBarFill,
+                      {
+                        width: `${widthPercentage}%`,
+                      },
+                    ]}
+                  />
+                </View>
+              </View>
+            );
+          })}
+        </View>
+      </ScrollView>
+    );
+  };
