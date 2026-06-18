@@ -1,17 +1,17 @@
-import { useMemo, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useTranslation } from 'react-i18next';
-import { usePokemonList } from '@/hooks/usePokemonList';
-import { PokemonListItem } from '@/types/pokemon.types';
-import { RootStackParamList } from '@/navigation/navigation.types';
+import { useMemo, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useTranslation } from "react-i18next";
+import { usePokemonList } from "@/hooks/usePokemonList";
+import { PokemonListItem } from "@/types/pokemon.types";
+import { RootStackParamList } from "@/navigation/navigation.types";
 
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const useHomeController = () => {
   const navigation = useNavigation<HomeNavigationProp>();
   const { t } = useTranslation();
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const {
     data,
@@ -26,7 +26,7 @@ export const useHomeController = () => {
   } = usePokemonList();
 
   const pokemons = useMemo<PokemonListItem[]>(() => {
-    return data?.pages.flatMap(page => page.results) ?? [];
+    return data?.pages.flatMap((page) => page.results) ?? [];
   }, [data]);
 
   const filteredPokemons = useMemo<PokemonListItem[]>(() => {
@@ -36,8 +36,8 @@ export const useHomeController = () => {
       return pokemons;
     }
 
-    return pokemons.filter(pokemon =>
-      pokemon.name.toLowerCase().includes(normalizedSearch)
+    return pokemons.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(normalizedSearch),
     );
   }, [pokemons, search]);
 
@@ -45,7 +45,7 @@ export const useHomeController = () => {
     search.trim().length > 0 && filteredPokemons.length === 0;
 
   const errorMessage =
-    error instanceof Error ? error.message : t('home.listError');
+    error instanceof Error ? error.message : t("home.listError");
 
   const handleEndReached = () => {
     if (!hasNextPage || isFetchingNextPage || search.trim().length > 0) {
@@ -56,7 +56,7 @@ export const useHomeController = () => {
   };
 
   const handlePokemonPress = (pokemon: PokemonListItem) => {
-    navigation.navigate('Detail', {
+    navigation.navigate("Detail", {
       name: pokemon.name,
     });
   };
@@ -65,6 +65,17 @@ export const useHomeController = () => {
     void refetch();
   };
 
+  // console.log("error", JSON.stringify(error, null, 2));
+  // console.log("isError", isError);
+  // console.log("isEmptySearch", isEmptySearch);
+  // console.log("isFetchingNextPage", isFetchingNextPage);
+  // console.log("isRefetching", isRefetching);
+  // console.log("isLoading", isLoading);
+  // console.log("pokemons", pokemons);
+  // console.log("filteredPokemons", filteredPokemons);
+  // console.log("search", search);
+
+  console.log("error", error?.message);
   return {
     t,
     search,

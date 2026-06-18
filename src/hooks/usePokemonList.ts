@@ -1,22 +1,23 @@
-import { getPokemonList } from '@/api/pokemon.api';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { getPokemonList } from "@/api/pokemon.api";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 const POKEMON_LIST_LIMIT = 20;
 
 export const usePokemonList = () => {
+  console.log("usePokemonList");
   return useInfiniteQuery({
-    queryKey: ['pokemon-list'],
-    queryFn: ({ pageParam }) => {
-      return getPokemonList(pageParam, POKEMON_LIST_LIMIT);
+    queryKey: ["pokemon-list"],
+    queryFn: ({ pageParam, signal }) => {
+      return getPokemonList(pageParam, POKEMON_LIST_LIMIT, signal);
     },
     initialPageParam: 0,
-    getNextPageParam: lastPage => {
+    getNextPageParam: (lastPage) => {
       if (!lastPage.next) {
         return undefined;
       }
 
       const url = new URL(lastPage.next);
-      const nextOffset = url.searchParams.get('offset');
+      const nextOffset = url.searchParams.get("offset");
 
       return nextOffset ? Number(nextOffset) : undefined;
     },

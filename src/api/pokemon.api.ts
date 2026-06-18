@@ -1,19 +1,20 @@
-
-import { PokemonDetailResponse, PokemonListResponse } from '@/types/pokemon.types';
-import { axiosClient } from './axiosClient';
-import { QueryFunctionContext } from '@tanstack/react-query';
+import {
+  PokemonDetailResponse,
+  PokemonListResponse,
+} from "@/types/pokemon.types";
+import { axiosClient } from "./axiosClient";
 
 export const getPokemonList = async (
   offset: number,
   limit: number,
-  {signal}: QueryFunctionContext
+  signal?: AbortSignal,
 ): Promise<PokemonListResponse> => {
-  const response = await axiosClient.get<PokemonListResponse>('/pokemon', {
+  const response = await axiosClient.get<PokemonListResponse>("/pokemon", {
     params: {
       offset,
       limit,
     },
-    signal
+    signal,
   });
 
   return response.data;
@@ -21,13 +22,13 @@ export const getPokemonList = async (
 
 export const getPokemonDetail = async (
   nameOrId: string,
-  {signal}: QueryFunctionContext
+  signal?: AbortSignal,
 ): Promise<PokemonDetailResponse> => {
   const response = await axiosClient.get<PokemonDetailResponse>(
     `/pokemon/${nameOrId}`,
     {
-      signal
-    }
+      signal,
+    },
   );
 
   return response.data;
