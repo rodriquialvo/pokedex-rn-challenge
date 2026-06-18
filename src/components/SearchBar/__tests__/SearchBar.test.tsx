@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react-native";
-import { SearchBar } from "../SearchBar";
 import { renderWithProviders } from "@/test-utils/renderWithProviders";
+import { SearchBar } from "../SearchBar";
 
 describe("SearchBar", () => {
   it("renders the placeholder", async () => {
