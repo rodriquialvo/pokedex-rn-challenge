@@ -65,17 +65,6 @@ export const useHomeController = () => {
     void refetch();
   };
 
-  // console.log("error", JSON.stringify(error, null, 2));
-  // console.log("isError", isError);
-  // console.log("isEmptySearch", isEmptySearch);
-  // console.log("isFetchingNextPage", isFetchingNextPage);
-  // console.log("isRefetching", isRefetching);
-  // console.log("isLoading", isLoading);
-  // console.log("pokemons", pokemons);
-  // console.log("filteredPokemons", filteredPokemons);
-  // console.log("search", search);
-
-  console.log("error", error?.message);
   return {
     t,
     search,

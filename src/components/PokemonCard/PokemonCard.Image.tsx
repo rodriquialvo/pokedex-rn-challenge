@@ -1,10 +1,11 @@
-import { Image, View } from 'react-native';
-import { useAppTheme } from '@/theme/useAppTheme';
-import { createPokemonCardStyles } from './PokemonCard.styles';
-import { PokemonCardImageProps } from './PokemonCard.types';
+import { ProgressiveImage } from "@/components/ProgressiveImage/ProgressiveImage";
+import { useAppTheme } from "@/theme/useAppTheme";
+import { createPokemonCardStyles } from "./PokemonCard.styles";
+import { PokemonCardImageProps } from "./PokemonCard.types";
 
 export const PokemonCardImage = ({
   source,
+  fallbackText,
   containerStyle,
   imageStyle,
 }: PokemonCardImageProps) => {
@@ -12,8 +13,11 @@ export const PokemonCardImage = ({
   const styles = createPokemonCardStyles(theme);
 
   return (
-    <View style={[styles.imageContainer, containerStyle]}>
-      <Image source={{ uri: source }} style={[styles.image, imageStyle]} />
-    </View>
+    <ProgressiveImage
+      source={source}
+      fallbackText={fallbackText}
+      containerStyle={[styles.imageContainer, containerStyle]}
+      imageStyle={[styles.image, imageStyle]}
+    />
   );
 };

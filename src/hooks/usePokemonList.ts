@@ -4,7 +4,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 const POKEMON_LIST_LIMIT = 20;
 
 export const usePokemonList = () => {
-  console.log("usePokemonList");
   return useInfiniteQuery({
     queryKey: ["pokemon-list"],
     queryFn: ({ pageParam, signal }) => {
