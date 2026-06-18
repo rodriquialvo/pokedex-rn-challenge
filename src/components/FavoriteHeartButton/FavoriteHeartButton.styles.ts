@@ -1,4 +1,3 @@
-// src/components/FavoriteHeartButton/FavoriteHeartButton.styles.ts
 import { StyleSheet } from "react-native";
 import { AppTheme } from "@/theme/colors";
 

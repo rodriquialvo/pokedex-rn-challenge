@@ -1,4 +1,3 @@
-// src/components/PokemonCardSkeleton/PokemonCardSkeleton.tsx
 import { View } from "react-native";
 import { useAppTheme } from "@/theme/useAppTheme";
 import { createPokemonCardSkeletonStyles } from "./PokemonCardSkeleton.styles";
