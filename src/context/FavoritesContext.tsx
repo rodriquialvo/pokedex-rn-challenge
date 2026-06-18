@@ -51,7 +51,7 @@ export const FavoritesProvider = ({ children }: PropsWithChildren) => {
       }
     };
 
-    void loadFavorites();
+    loadFavorites();
   }, []);
 
   const persistFavorites = async (nextFavorites: FavoritePokemon[]) => {

@@ -68,13 +68,13 @@ export const useDetailController = () => {
     error instanceof Error ? error.message : t("common.error");
 
   const handleRefresh = () => {
-    void refetch();
+    refetch();
   };
 
   const handleToggleFavorite = () => {
     if (!favoritePokemon) return;
 
-    void toggleFavorite(favoritePokemon);
+    toggleFavorite(favoritePokemon);
   };
 
   return {
