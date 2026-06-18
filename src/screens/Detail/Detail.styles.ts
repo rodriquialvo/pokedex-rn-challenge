@@ -11,13 +11,6 @@ export const createDetailStyles = (theme: AppTheme) => {
       padding: 16,
       paddingBottom: 32,
     },
-    centerContent: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      padding: 24,
-      backgroundColor: theme.background,
-    },
     heroCard: {
       backgroundColor: theme.card,
       borderRadius: 24,
@@ -130,31 +123,6 @@ export const createDetailStyles = (theme: AppTheme) => {
       height: 8,
       backgroundColor: theme.primary,
       borderRadius: 999,
-    },
-    messageText: {
-      color: theme.textMuted,
-      fontSize: 16,
-      textAlign: "center",
-      lineHeight: 22,
-    },
-    errorTitle: {
-      color: theme.text,
-      fontSize: 18,
-      fontWeight: "700",
-      textAlign: "center",
-      marginBottom: 8,
-    },
-    retryButton: {
-      marginTop: 16,
-      backgroundColor: theme.primary,
-      paddingHorizontal: 20,
-      paddingVertical: 12,
-      borderRadius: 12,
-    },
-    retryButtonText: {
-      color: "#FFFFFF",
-      fontSize: 15,
-      fontWeight: "700",
     },
     favoriteButton: {
       marginTop: 16,

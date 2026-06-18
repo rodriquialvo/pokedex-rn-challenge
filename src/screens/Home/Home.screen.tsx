@@ -1,21 +1,18 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { EmptyState } from "@/components/EmptyState/EmptyState";
+import { ErrorState } from "@/components/ErrorState/ErrorState";
+import { LoadingState } from "@/components/LoadingState/LoadingState";
+import { LanguageToggle } from "@/components/LanguageToggle/LanguageToggle";
 import { PokemonCard } from "@/components/PokemonCard/PokemonCard";
+import { SearchBar } from "@/components/SearchBar/SearchBar";
+import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
 import { useAppTheme } from "@/theme/useAppTheme";
+import { createHomeStyles } from "./Home.styles";
+import { useHomeController } from "./Home.controller";
 import {
   getPokemonIdFromUrl,
   getPokemonImageById,
 } from "@/utils/pokemon.utils";
-import { createHomeStyles } from "./Home.styles";
-import { useHomeController } from "./Home.controller";
-import { SearchBar } from "@/components/SearchBar/SearchBar";
-import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
-import { LanguageToggle } from "@/components/LanguageToggle/LanguageToggle";
 
 export const HomeScreen = () => {
   const theme = useAppTheme();
@@ -32,32 +29,25 @@ export const HomeScreen = () => {
     errorMessage,
     isFetchingNextPage,
     isRefetching,
+    isFavorite,
     handleEndReached,
     handlePokemonPress,
     handleRefresh,
-    isFavorite,
     handleToggleFavoriteFromList,
   } = useHomeController();
 
   if (isLoading) {
-    return (
-      <View style={styles.centerContent}>
-        <ActivityIndicator size="large" color={theme.primary} />
-        <Text style={styles.messageText}>{t("common.loading")}</Text>
-      </View>
-    );
+    return <LoadingState message={t("common.loading")} />;
   }
 
   if (isError) {
     return (
-      <View style={styles.centerContent}>
-        <Text style={styles.errorTitle}>{t("home.listError")}</Text>
-        <Text style={styles.messageText}>{errorMessage}</Text>
-
-        <TouchableOpacity style={styles.retryButton} onPress={handleRefresh}>
-          <Text style={styles.retryButtonText}>{t("common.retry")}</Text>
-        </TouchableOpacity>
-      </View>
+      <ErrorState
+        title={t("home.listError")}
+        message={errorMessage}
+        retryLabel={t("common.retry")}
+        onRetry={handleRefresh}
+      />
     );
   }
 
@@ -66,11 +56,13 @@ export const HomeScreen = () => {
       <View style={styles.header}>
         <View style={styles.headerTop}>
           <Text style={styles.title}>{t("home.title")}</Text>
+
           <View style={styles.headerActions}>
             <LanguageToggle />
             <ThemeToggle />
           </View>
         </View>
+
         <SearchBar
           value={search}
           onChangeText={setSearch}
@@ -79,9 +71,7 @@ export const HomeScreen = () => {
       </View>
 
       {isEmptySearch ? (
-        <View style={styles.centerContent}>
-          <Text style={styles.messageText}>{t("home.emptySearch")}</Text>
-        </View>
+        <EmptyState message={t("home.emptySearch")} />
       ) : (
         <FlatList
           data={pokemons}
@@ -101,6 +91,7 @@ export const HomeScreen = () => {
                   <PokemonCard.Number value={pokemonId} />
                   <PokemonCard.Title name={item.name} />
                 </PokemonCard.Content>
+
                 <PokemonCard.FavoriteButton
                   isActive={isFavorite(pokemonId)}
                   onPress={() =>

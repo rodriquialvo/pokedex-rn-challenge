@@ -18,29 +18,5 @@ export const createFavoritesStyles = (theme: AppTheme) => {
     listContent: {
       paddingBottom: 24,
     },
-    centerContent: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      paddingHorizontal: 24,
-      backgroundColor: theme.background,
-    },
-    messageText: {
-      color: theme.textMuted,
-      fontSize: 16,
-      textAlign: "center",
-      lineHeight: 22,
-    },
-    removeButton: {
-      backgroundColor: theme.danger,
-      paddingHorizontal: 12,
-      paddingVertical: 8,
-      borderRadius: 999,
-    },
-    removeButtonText: {
-      color: "#FFFFFF",
-      fontSize: 13,
-      fontWeight: "800",
-    },
   });
 };

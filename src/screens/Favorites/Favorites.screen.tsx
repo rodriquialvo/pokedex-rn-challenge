@@ -1,10 +1,6 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { FlatList, Text, View } from "react-native";
+import { EmptyState } from "@/components/EmptyState/EmptyState";
+import { LoadingState } from "@/components/LoadingState/LoadingState";
 import { PokemonCard } from "@/components/PokemonCard/PokemonCard";
 import { useAppTheme } from "@/theme/useAppTheme";
 import { createFavoritesStyles } from "./Favorites.styles";
@@ -24,20 +20,11 @@ export const FavoritesScreen = () => {
   } = useFavoritesController();
 
   if (isLoadingFavorites) {
-    return (
-      <View style={styles.centerContent}>
-        <ActivityIndicator size="large" color={theme.primary} />
-        <Text style={styles.messageText}>{t("common.loading")}</Text>
-      </View>
-    );
+    return <LoadingState message={t("common.loading")} />;
   }
 
   if (!hasFavorites) {
-    return (
-      <View style={styles.centerContent}>
-        <Text style={styles.messageText}>{t("favorites.empty")}</Text>
-      </View>
-    );
+    return <EmptyState message={t("favorites.empty")} />;
   }
 
   return (

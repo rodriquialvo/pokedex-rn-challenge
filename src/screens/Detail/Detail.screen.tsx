@@ -1,18 +1,12 @@
-import {
-  ActivityIndicator,
-  Image,
-  RefreshControl,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { RefreshControl, ScrollView, Text, View } from "react-native";
 import { useAppTheme } from "@/theme/useAppTheme";
 import { createDetailStyles } from "./Detail.styles";
 import { useDetailController } from "./Detail.controller";
 import { capitalize } from "@/utils/pokemon.utils";
 import { ProgressiveImage } from "@/components/ProgressiveImage/ProgressiveImage";
 import { FavoriteHeartButton } from "@/components/FavoriteHeartButton/FavoriteHeartButton";
+import { ErrorState } from "@/components/ErrorState/ErrorState";
+import { LoadingState } from "@/components/LoadingState/LoadingState";
 
 const MAX_STAT_VALUE = 150;
 
@@ -37,24 +31,17 @@ export const DetailScreen = () => {
   } = useDetailController();
 
   if (isLoading) {
-    return (
-      <View style={styles.centerContent}>
-        <ActivityIndicator size="large" color={theme.primary} />
-        <Text style={styles.messageText}>{t("common.loading")}</Text>
-      </View>
-    );
+    return <LoadingState message={t("common.loading")} />;
   }
 
   if (isError || !pokemon) {
     return (
-      <View style={styles.centerContent}>
-        <Text style={styles.errorTitle}>{t("common.error")}</Text>
-        <Text style={styles.messageText}>{errorMessage}</Text>
-
-        <TouchableOpacity style={styles.retryButton} onPress={handleRefresh}>
-          <Text style={styles.retryButtonText}>{t("common.retry")}</Text>
-        </TouchableOpacity>
-      </View>
+      <ErrorState
+        title={t("common.error")}
+        message={errorMessage}
+        retryLabel={t("common.retry")}
+        onRetry={handleRefresh}
+      />
     );
   }
 
