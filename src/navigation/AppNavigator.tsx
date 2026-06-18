@@ -1,15 +1,16 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useTranslation } from 'react-i18next';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useTranslation } from "react-i18next";
 import {
   MainTabParamList,
   RootStackParamList,
-} from '@/navigation/navigation.types';
-import { useThemeContext } from '@/context/ThemeContext';
-import { HomeScreen } from '@/screens/Home/Home.screen';
-import { FavoritesScreen } from '@/screens/Favorites/Favorites.screen';
-import { DetailScreen } from '@/screens/Detail/Detail.screen';
+} from "@/navigation/navigation.types";
+import { useThemeContext } from "@/context/ThemeContext";
+import { HomeScreen } from "@/screens/Home/Home.screen";
+import { FavoritesScreen } from "@/screens/Favorites/Favorites.screen";
+import { DetailScreen } from "@/screens/Detail/Detail.screen";
+import { capitalize } from "@/utils/pokemon.utils";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -37,7 +38,7 @@ const MainTabs = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          title: t('tabs.home'),
+          title: t("tabs.home"),
         }}
       />
 
@@ -45,7 +46,7 @@ const MainTabs = () => {
         name="Favorites"
         component={FavoritesScreen}
         options={{
-          title: t('tabs.favorites'),
+          title: t("tabs.favorites"),
         }}
       />
     </Tab.Navigator>
@@ -79,9 +80,9 @@ export const AppNavigator = () => {
         <Stack.Screen
           name="Detail"
           component={DetailScreen}
-          options={{
-            title: 'Detail',
-          }}
+          options={({ route }) => ({
+            title: capitalize(route.params.name),
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
