@@ -79,24 +79,11 @@ export const useHomeController = () => {
     pokemonId: number,
     image: string,
   ) => {
-    if (isFavorite(pokemonId)) {
-      await toggleFavorite({
-        id: pokemonId,
-        name: pokemon.name,
-        image,
-        types: [],
-      });
-
-      return;
-    }
-
-    const pokemonDetail = await getPokemonDetail(pokemon.name);
-
     await toggleFavorite({
-      id: pokemonDetail.id,
-      name: pokemonDetail.name,
-      image: pokemonDetail.image ?? image,
-      types: pokemonDetail.types,
+      id: pokemonId,
+      name: pokemon.name,
+      image,
+      types: [],
     });
   };
 
