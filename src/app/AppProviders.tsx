@@ -5,6 +5,7 @@ import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { FavoritesProvider } from "@/context/FavoritesContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,7 +32,9 @@ export const AppProviders = ({ children }: PropsWithChildren) => {
       }}
     >
       <ThemeProvider>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <FavoritesProvider>{children}</FavoritesProvider>
+        </LanguageProvider>
       </ThemeProvider>
     </PersistQueryClientProvider>
   );

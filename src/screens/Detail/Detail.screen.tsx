@@ -31,6 +31,8 @@ export const DetailScreen = () => {
     isRefetching,
     errorMessage,
     handleRefresh,
+    isCurrentPokemonFavorite,
+    handleToggleFavorite,
   } = useDetailController();
 
   if (isLoading) {
@@ -78,6 +80,16 @@ export const DetailScreen = () => {
         </Text>
 
         <Text style={styles.pokemonName}>{capitalize(pokemon.name)}</Text>
+        <TouchableOpacity
+          style={styles.favoriteButton}
+          onPress={handleToggleFavorite}
+        >
+          <Text style={styles.favoriteButtonText}>
+            {isCurrentPokemonFavorite
+              ? t("detail.removeFavorite")
+              : t("detail.addFavorite")}
+          </Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.section}>

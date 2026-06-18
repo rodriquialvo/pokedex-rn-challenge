@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { AppTheme } from '@/theme/colors';
+import { StyleSheet } from "react-native";
+import { AppTheme } from "@/theme/colors";
 
 export const createDetailStyles = (theme: AppTheme) => {
   return StyleSheet.create({
@@ -13,8 +13,8 @@ export const createDetailStyles = (theme: AppTheme) => {
     },
     centerContent: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: "center",
+      justifyContent: "center",
       padding: 24,
       backgroundColor: theme.background,
     },
@@ -24,25 +24,25 @@ export const createDetailStyles = (theme: AppTheme) => {
       borderWidth: 1,
       borderColor: theme.border,
       padding: 20,
-      alignItems: 'center',
+      alignItems: "center",
       marginBottom: 16,
     },
     image: {
       width: 220,
       height: 220,
-      resizeMode: 'contain',
+      resizeMode: "contain",
     },
     pokemonNumber: {
       color: theme.textMuted,
       fontSize: 15,
-      fontWeight: '700',
+      fontWeight: "700",
       marginTop: 8,
     },
     pokemonName: {
       color: theme.text,
       fontSize: 34,
-      fontWeight: '900',
-      textTransform: 'capitalize',
+      fontWeight: "900",
+      textTransform: "capitalize",
       marginTop: 4,
     },
     section: {
@@ -56,12 +56,12 @@ export const createDetailStyles = (theme: AppTheme) => {
     sectionTitle: {
       color: theme.text,
       fontSize: 20,
-      fontWeight: '800',
+      fontWeight: "800",
       marginBottom: 12,
     },
     chipContainer: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
+      flexDirection: "row",
+      flexWrap: "wrap",
       gap: 8,
     },
     chip: {
@@ -75,11 +75,11 @@ export const createDetailStyles = (theme: AppTheme) => {
     chipText: {
       color: theme.text,
       fontSize: 14,
-      fontWeight: '700',
-      textTransform: 'capitalize',
+      fontWeight: "700",
+      textTransform: "capitalize",
     },
     infoGrid: {
-      flexDirection: 'row',
+      flexDirection: "row",
       gap: 12,
     },
     infoItem: {
@@ -93,38 +93,38 @@ export const createDetailStyles = (theme: AppTheme) => {
     infoLabel: {
       color: theme.textMuted,
       fontSize: 13,
-      fontWeight: '600',
+      fontWeight: "600",
       marginBottom: 6,
     },
     infoValue: {
       color: theme.text,
       fontSize: 18,
-      fontWeight: '800',
+      fontWeight: "800",
     },
     statRow: {
       marginBottom: 12,
     },
     statHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
+      flexDirection: "row",
+      justifyContent: "space-between",
       marginBottom: 6,
     },
     statName: {
       color: theme.text,
       fontSize: 14,
-      fontWeight: '700',
-      textTransform: 'capitalize',
+      fontWeight: "700",
+      textTransform: "capitalize",
     },
     statValue: {
       color: theme.textMuted,
       fontSize: 14,
-      fontWeight: '700',
+      fontWeight: "700",
     },
     statBarBackground: {
       height: 8,
       backgroundColor: theme.background,
       borderRadius: 999,
-      overflow: 'hidden',
+      overflow: "hidden",
     },
     statBarFill: {
       height: 8,
@@ -134,14 +134,14 @@ export const createDetailStyles = (theme: AppTheme) => {
     messageText: {
       color: theme.textMuted,
       fontSize: 16,
-      textAlign: 'center',
+      textAlign: "center",
       lineHeight: 22,
     },
     errorTitle: {
       color: theme.text,
       fontSize: 18,
-      fontWeight: '700',
-      textAlign: 'center',
+      fontWeight: "700",
+      textAlign: "center",
       marginBottom: 8,
     },
     retryButton: {
@@ -152,9 +152,21 @@ export const createDetailStyles = (theme: AppTheme) => {
       borderRadius: 12,
     },
     retryButtonText: {
-      color: '#FFFFFF',
+      color: "#FFFFFF",
       fontSize: 15,
-      fontWeight: '700',
+      fontWeight: "700",
+    },
+    favoriteButton: {
+      marginTop: 16,
+      backgroundColor: theme.primary,
+      paddingHorizontal: 18,
+      paddingVertical: 12,
+      borderRadius: 999,
+    },
+    favoriteButtonText: {
+      color: "#FFFFFF",
+      fontSize: 15,
+      fontWeight: "800",
     },
   });
 };
