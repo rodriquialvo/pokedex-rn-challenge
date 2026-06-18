@@ -5,4 +5,5 @@ jest.mock("@/theme/useAppTheme", () => ({
 jest.mock("@expo/vector-icons", () => ({
   AntDesign: "AntDesign",
   Feather: "Feather",
+  Entypo: "Entypo",
 }));
