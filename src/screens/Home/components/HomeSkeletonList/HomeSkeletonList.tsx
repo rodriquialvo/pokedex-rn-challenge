@@ -1,4 +1,3 @@
-// src/features/pokemon/screens/Home/components/HomeSkeletonList.tsx
 import { View } from "react-native";
 import { PokemonCardSkeleton } from "@/components/PokemonCardSkeleton/PokemonCardSkeleton";
 import { useAppTheme } from "@/theme/useAppTheme";

@@ -1,4 +1,3 @@
-// src/components/FavoriteHeartButton/FavoriteHeartButton.tsx
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { Pressable } from "react-native";
 import { useAppTheme } from "@/theme/useAppTheme";
