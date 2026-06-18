@@ -48,7 +48,8 @@
     "format:check": "prettier --check .",
     "prepare": "husky",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
