@@ -1,4 +1,4 @@
-import { AntDesign, Entypo } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import { Pressable } from "react-native";
 import { useAppTheme } from "@/theme/useAppTheme";
 import { createFavoriteHeartButtonStyles } from "./FavoriteHeartButton.styles";
@@ -13,12 +13,20 @@ export const FavoriteHeartButton = ({
   const theme = useAppTheme();
   const styles = createFavoriteHeartButtonStyles(theme);
 
-  const iconName = isActive ? "heart" : "heart-outlined";
+  const iconName: keyof typeof Entypo.glyphMap = isActive
+    ? "heart"
+    : "heart-outlined";
+
   const iconSize = size === "small" ? 19 : 26;
   const iconColor = isActive ? theme.primary : theme.textMuted;
 
   return (
     <Pressable
+      testID="favorite-heart-button"
+      accessibilityRole="button"
+      accessibilityLabel={
+        isActive ? "Remove from favorites" : "Add to favorites"
+      }
       onPress={(event) => {
         event.stopPropagation();
         onPress();
