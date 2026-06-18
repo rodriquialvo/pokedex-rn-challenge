@@ -1,10 +1,9 @@
 import { useMemo } from "react";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { RootStackParamList } from "@/navigation/navigation.types";
 import { useFavoritesContext } from "@/context/FavoritesContext";
+import { RootStackParamList } from "@/navigation/navigation.types";
 import { usePokemonDetail } from "@/hooks/usePokemonDetail";
-import { getPokemonImageById } from "@/utils/pokemon.utils";
 import { FavoritePokemon } from "@/types/pokemon.types";
 
 type DetailRouteProp = RouteProp<RootStackParamList, "Detail">;
@@ -25,42 +24,16 @@ export const useDetailController = () => {
     isRefetching,
   } = usePokemonDetail(name);
 
-  const image = useMemo(() => {
-    if (!pokemon) return "";
-
-    const officialArtwork =
-      pokemon.sprites.other["official-artwork"].front_default;
-
-    return officialArtwork ?? getPokemonImageById(pokemon.id);
-  }, [pokemon]);
-
-  const types = useMemo(() => {
-    return pokemon?.types.map((item) => item.type.name) ?? [];
-  }, [pokemon]);
-
-  const abilities = useMemo(() => {
-    return pokemon?.abilities.map((item) => item.ability.name) ?? [];
-  }, [pokemon]);
-
-  const stats = useMemo(() => {
-    return (
-      pokemon?.stats.map((item) => ({
-        name: item.stat.name,
-        value: item.base_stat,
-      })) ?? []
-    );
-  }, [pokemon]);
-
   const favoritePokemon = useMemo<FavoritePokemon | null>(() => {
     if (!pokemon) return null;
 
     return {
       id: pokemon.id,
       name: pokemon.name,
-      image,
-      types,
+      image: pokemon.image ?? "",
+      types: pokemon.types,
     };
-  }, [pokemon, image, types]);
+  }, [pokemon]);
 
   const isCurrentPokemonFavorite = pokemon ? isFavorite(pokemon.id) : false;
 
@@ -80,10 +53,10 @@ export const useDetailController = () => {
   return {
     t,
     pokemon,
-    image,
-    types,
-    abilities,
-    stats,
+    image: pokemon?.image ?? "",
+    types: pokemon?.types ?? [],
+    abilities: pokemon?.abilities ?? [],
+    stats: pokemon?.stats ?? [],
     isLoading,
     isError,
     isRefetching,
