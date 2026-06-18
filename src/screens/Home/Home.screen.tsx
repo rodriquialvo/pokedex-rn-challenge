@@ -14,6 +14,8 @@ import {
 import { createHomeStyles } from "./Home.styles";
 import { useHomeController } from "./Home.controller";
 import { SearchBar } from "@/components/SearchBar/SearchBar";
+import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
+import { LanguageToggle } from "@/components/LanguageToggle/LanguageToggle";
 
 export const HomeScreen = () => {
   const theme = useAppTheme();
@@ -62,7 +64,13 @@ export const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>{t("home.title")}</Text>
+        <View style={styles.headerTop}>
+          <Text style={styles.title}>{t("home.title")}</Text>
+          <View style={styles.headerActions}>
+            <LanguageToggle />
+            <ThemeToggle />
+          </View>
+        </View>
         <SearchBar
           value={search}
           onChangeText={setSearch}
