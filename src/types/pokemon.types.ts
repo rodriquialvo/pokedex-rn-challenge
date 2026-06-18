@@ -10,41 +10,35 @@ export type PokemonListResponse = {
   results: PokemonListItem[];
 };
 
-export type PokemonTypeSlot = {
-  slot: number;
-  type: {
-    name: string;
-    url: string;
-  };
-};
-
-export type PokemonAbilitySlot = {
-  ability: {
-    name: string;
-    url: string;
-  };
-  is_hidden: boolean;
-  slot: number;
-};
-
-export type PokemonStatSlot = {
-  base_stat: number;
-  effort: number;
-  stat: {
-    name: string;
-    url: string;
-  };
-};
-
-export type PokemonDetailResponse = {
+export type PokemonDetailApiResponse = {
   id: number;
   name: string;
   height: number;
   weight: number;
   base_experience: number;
-  types: PokemonTypeSlot[];
-  abilities: PokemonAbilitySlot[];
-  stats: PokemonStatSlot[];
+  types: {
+    slot: number;
+    type: {
+      name: string;
+      url: string;
+    };
+  }[];
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    };
+    is_hidden: boolean;
+    slot: number;
+  }[];
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
   sprites: {
     front_default: string | null;
     other: {
@@ -53,6 +47,21 @@ export type PokemonDetailResponse = {
       };
     };
   };
+};
+
+export type PokemonDetail = {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  baseExperience: number;
+  image: string | null;
+  types: string[];
+  abilities: string[];
+  stats: {
+    name: string;
+    value: number;
+  }[];
 };
 
 export type FavoritePokemon = {

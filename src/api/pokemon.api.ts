@@ -1,8 +1,10 @@
 import {
-  PokemonDetailResponse,
+  PokemonDetail,
+  PokemonDetailApiResponse,
   PokemonListResponse,
 } from "@/types/pokemon.types";
 import { axiosClient } from "./axiosClient";
+import { mapPokemonDetail } from "./mappers/pokemon.mapper";
 
 export const getPokemonList = async (
   offset: number,
@@ -23,13 +25,13 @@ export const getPokemonList = async (
 export const getPokemonDetail = async (
   nameOrId: string,
   signal?: AbortSignal,
-): Promise<PokemonDetailResponse> => {
-  const response = await axiosClient.get<PokemonDetailResponse>(
+): Promise<PokemonDetail> => {
+  const response = await axiosClient.get<PokemonDetailApiResponse>(
     `/pokemon/${nameOrId}`,
     {
       signal,
     },
   );
 
-  return response.data;
+  return mapPokemonDetail(response.data);
 };

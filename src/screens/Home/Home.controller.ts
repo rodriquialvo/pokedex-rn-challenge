@@ -92,17 +92,11 @@ export const useHomeController = () => {
 
     const pokemonDetail = await getPokemonDetail(pokemon.name);
 
-    const officialArtwork =
-      pokemonDetail.sprites.other["official-artwork"].front_default;
-
-    const favoriteImage =
-      officialArtwork ?? getPokemonImageById(pokemonDetail.id);
-
     await toggleFavorite({
       id: pokemonDetail.id,
       name: pokemonDetail.name,
-      image: favoriteImage,
-      types: pokemonDetail.types.map((item) => item.type.name),
+      image: pokemonDetail.image ?? image,
+      types: pokemonDetail.types,
     });
   };
 

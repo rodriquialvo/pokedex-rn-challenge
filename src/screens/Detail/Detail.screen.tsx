@@ -6,7 +6,6 @@ import { capitalize } from "@/utils/pokemon.utils";
 import { ProgressiveImage } from "@/components/ProgressiveImage/ProgressiveImage";
 import { FavoriteHeartButton } from "@/components/FavoriteHeartButton/FavoriteHeartButton";
 import { ErrorState } from "@/components/ErrorState/ErrorState";
-import { LoadingState } from "@/components/LoadingState/LoadingState";
 import { DetailSkeleton } from "./components/DetailSkeleton/DetailSkeleton";
 
 const MAX_STAT_VALUE = 150;
@@ -102,7 +101,7 @@ export const DetailScreen = () => {
 
           <View style={styles.infoItem}>
             <Text style={styles.infoLabel}>{t("detail.baseExperience")}</Text>
-            <Text style={styles.infoValue}>{pokemon.base_experience}</Text>
+            <Text style={styles.infoValue}>{pokemon.baseExperience}</Text>
           </View>
         </View>
       </View>
