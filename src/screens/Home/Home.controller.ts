@@ -6,8 +6,6 @@ import { RootStackParamList } from "@/navigation/navigation.types";
 import { useFavoritesContext } from "@/context/FavoritesContext";
 import { PokemonListItem } from "@/types/pokemon.types";
 import { usePokemonList } from "@/hooks/usePokemonList";
-import { getPokemonDetail } from "@/api/pokemon.api";
-import { getPokemonImageById } from "@/utils/pokemon.utils";
 import { useIsRestoring } from "@tanstack/react-query";
 
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList>;

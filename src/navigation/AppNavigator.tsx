@@ -1,90 +1,46 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useTranslation } from "react-i18next";
-import {
-  MainTabParamList,
-  RootStackParamList,
-} from "@/navigation/navigation.types";
-import { useThemeContext } from "@/context/ThemeContext";
-import { HomeScreen } from "@/screens/Home/Home.screen";
-import { FavoritesScreen } from "@/screens/Favorites/Favorites.screen";
+
 import { DetailScreen } from "@/screens/Detail/Detail.screen";
+import { useAppTheme } from "@/theme/useAppTheme";
 import { capitalize } from "@/utils/pokemon.utils";
+import { MainTabs } from "./MainTabs";
+import { RootStackParamList } from "./navigation.types";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator<MainTabParamList>();
 
-const MainTabs = () => {
-  const { t } = useTranslation();
-  const { theme } = useThemeContext();
+export const AppNavigator = () => {
+  const theme = useAppTheme();
 
   return (
-    <Tab.Navigator
+    <Stack.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: theme.background,
         },
         headerTintColor: theme.text,
-        tabBarStyle: {
-          backgroundColor: theme.card,
-          borderTopColor: theme.border,
+        headerTitleStyle: {
+          fontWeight: "800",
         },
-        tabBarActiveTintColor: theme.primary,
-        tabBarInactiveTintColor: theme.textMuted,
+        contentStyle: {
+          backgroundColor: theme.background,
+        },
       }}
     >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+      <Stack.Screen
+        name="MainTabs"
+        component={MainTabs}
         options={{
-          title: t("tabs.home"),
+          headerShown: false,
         }}
       />
 
-      <Tab.Screen
-        name="Favorites"
-        component={FavoritesScreen}
-        options={{
-          title: t("tabs.favorites"),
-        }}
+      <Stack.Screen
+        name="Detail"
+        component={DetailScreen}
+        options={({ route }) => ({
+          title: capitalize(route.params.name),
+        })}
       />
-    </Tab.Navigator>
-  );
-};
-
-export const AppNavigator = () => {
-  const { theme } = useThemeContext();
-
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: theme.background,
-          },
-          headerTintColor: theme.text,
-          contentStyle: {
-            backgroundColor: theme.background,
-          },
-        }}
-      >
-        <Stack.Screen
-          name="MainTabs"
-          component={MainTabs}
-          options={{
-            headerShown: false,
-          }}
-        />
-
-        <Stack.Screen
-          name="Detail"
-          component={DetailScreen}
-          options={({ route }) => ({
-            title: capitalize(route.params.name),
-          })}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    </Stack.Navigator>
   );
 };
