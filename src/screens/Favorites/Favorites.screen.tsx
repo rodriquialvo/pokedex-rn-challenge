@@ -61,12 +61,10 @@ export const FavoritesScreen = () => {
               <PokemonCard.Title name={item.name} />
             </PokemonCard.Content>
 
-            <TouchableOpacity
-              style={styles.removeButton}
+            <PokemonCard.FavoriteButton
+              isActive
               onPress={() => handleRemoveFavorite(item.id)}
-            >
-              <Text style={styles.removeButtonText}>X</Text>
-            </TouchableOpacity>
+            />
           </PokemonCard.Root>
         )}
       />

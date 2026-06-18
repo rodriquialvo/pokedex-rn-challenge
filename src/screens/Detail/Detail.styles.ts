@@ -168,5 +168,10 @@ export const createDetailStyles = (theme: AppTheme) => {
       fontSize: 15,
       fontWeight: "800",
     },
+    detailFavoriteButton: {
+      marginTop: 16,
+      position: "absolute",
+      right: 16,
+    },
   });
 };

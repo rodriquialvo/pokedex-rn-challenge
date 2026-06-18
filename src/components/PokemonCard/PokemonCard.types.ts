@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
-import { ImageStyle, StyleProp, ViewStyle } from 'react-native';
+import { PropsWithChildren } from "react";
+import { ImageStyle, StyleProp, ViewStyle } from "react-native";
 
 export type PokemonCardRootProps = PropsWithChildren<{
   onPress: () => void;
@@ -20,4 +20,9 @@ export type PokemonCardNumberProps = {
 
 export type PokemonCardTitleProps = {
   name: string;
+};
+
+export type PokemonCardFavoriteButtonProps = {
+  isActive: boolean;
+  onPress: () => void;
 };

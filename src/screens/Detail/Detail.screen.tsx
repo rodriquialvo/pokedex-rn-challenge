@@ -12,6 +12,7 @@ import { createDetailStyles } from "./Detail.styles";
 import { useDetailController } from "./Detail.controller";
 import { capitalize } from "@/utils/pokemon.utils";
 import { ProgressiveImage } from "@/components/ProgressiveImage/ProgressiveImage";
+import { FavoriteHeartButton } from "@/components/FavoriteHeartButton/FavoriteHeartButton";
 
 const MAX_STAT_VALUE = 150;
 
@@ -80,16 +81,11 @@ export const DetailScreen = () => {
         </Text>
 
         <Text style={styles.pokemonName}>{capitalize(pokemon.name)}</Text>
-        <TouchableOpacity
-          style={styles.favoriteButton}
+        <FavoriteHeartButton
+          isActive={isCurrentPokemonFavorite}
           onPress={handleToggleFavorite}
-        >
-          <Text style={styles.favoriteButtonText}>
-            {isCurrentPokemonFavorite
-              ? t("detail.removeFavorite")
-              : t("detail.addFavorite")}
-          </Text>
-        </TouchableOpacity>
+          style={styles.detailFavoriteButton}
+        />
       </View>
 
       <View style={styles.section}>
