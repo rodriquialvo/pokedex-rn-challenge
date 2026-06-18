@@ -7,6 +7,7 @@ import { ProgressiveImage } from "@/components/ProgressiveImage/ProgressiveImage
 import { FavoriteHeartButton } from "@/components/FavoriteHeartButton/FavoriteHeartButton";
 import { ErrorState } from "@/components/ErrorState/ErrorState";
 import { LoadingState } from "@/components/LoadingState/LoadingState";
+import { DetailSkeleton } from "./components/DetailSkeleton/DetailSkeleton";
 
 const MAX_STAT_VALUE = 150;
 
@@ -31,7 +32,7 @@ export const DetailScreen = () => {
   } = useDetailController();
 
   if (isLoading) {
-    return <LoadingState message={t("common.loading")} />;
+    return <DetailSkeleton />;
   }
 
   if (isError || !pokemon) {

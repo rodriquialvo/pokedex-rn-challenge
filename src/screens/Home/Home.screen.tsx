@@ -1,7 +1,6 @@
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import { EmptyState } from "@/components/EmptyState/EmptyState";
 import { ErrorState } from "@/components/ErrorState/ErrorState";
-import { LoadingState } from "@/components/LoadingState/LoadingState";
 import { LanguageToggle } from "@/components/LanguageToggle/LanguageToggle";
 import { PokemonCard } from "@/components/PokemonCard/PokemonCard";
 import { SearchBar } from "@/components/SearchBar/SearchBar";
@@ -13,6 +12,7 @@ import {
   getPokemonIdFromUrl,
   getPokemonImageById,
 } from "@/utils/pokemon.utils";
+import { HomeSkeletonList } from "./components/HomeSkeletonList/HomeSkeletonList";
 
 export const HomeScreen = () => {
   const theme = useAppTheme();
@@ -23,7 +23,6 @@ export const HomeScreen = () => {
     search,
     setSearch,
     pokemons,
-    isLoading,
     isError,
     isEmptySearch,
     errorMessage,
@@ -34,10 +33,11 @@ export const HomeScreen = () => {
     handlePokemonPress,
     handleRefresh,
     handleToggleFavoriteFromList,
+    isInitialLoading,
   } = useHomeController();
 
-  if (isLoading) {
-    return <LoadingState message={t("common.loading")} />;
+  if (isInitialLoading) {
+    return <HomeSkeletonList />;
   }
 
   if (isError) {

@@ -8,6 +8,7 @@ import { PokemonListItem } from "@/types/pokemon.types";
 import { usePokemonList } from "@/hooks/usePokemonList";
 import { getPokemonDetail } from "@/api/pokemon.api";
 import { getPokemonImageById } from "@/utils/pokemon.utils";
+import { useIsRestoring } from "@tanstack/react-query";
 
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -28,7 +29,10 @@ export const useHomeController = () => {
     isFetchingNextPage,
     refetch,
     isRefetching,
+    isFetching,
   } = usePokemonList();
+
+  const isRestoring = useIsRestoring();
 
   const pokemons = useMemo<PokemonListItem[]>(() => {
     return data?.pages.flatMap((page) => page.results) ?? [];
@@ -102,6 +106,9 @@ export const useHomeController = () => {
     });
   };
 
+  const isInitialLoading =
+    isRestoring || ((isLoading || isFetching) && pokemons.length === 0);
+
   return {
     t,
     search,
@@ -113,6 +120,7 @@ export const useHomeController = () => {
     errorMessage,
     isFetchingNextPage,
     isRefetching,
+    isInitialLoading,
     isFavorite,
     handleEndReached,
     handlePokemonPress,

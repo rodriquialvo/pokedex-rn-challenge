@@ -24,7 +24,6 @@ export const getPokemonDetail = async (
   nameOrId: string,
   signal?: AbortSignal,
 ): Promise<PokemonDetailResponse> => {
-  console.log("fetching detail");
   const response = await axiosClient.get<PokemonDetailResponse>(
     `/pokemon/${nameOrId}`,
     {
