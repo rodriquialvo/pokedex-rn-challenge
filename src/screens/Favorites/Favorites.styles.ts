@@ -9,12 +9,6 @@ export const createFavoritesStyles = (theme: AppTheme) => {
       paddingHorizontal: 16,
       paddingTop: 16,
     },
-    title: {
-      color: theme.text,
-      fontSize: 32,
-      fontWeight: "800",
-      marginBottom: 16,
-    },
     listContent: {
       paddingBottom: 24,
     },

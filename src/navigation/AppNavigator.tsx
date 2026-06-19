@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { AppHeader } from "@/components/AppHeader/AppHeader";
 import { DetailScreen } from "@/screens/Detail/Detail.screen";
 import { useAppTheme } from "@/theme/useAppTheme";
 import { capitalize } from "@/utils/pokemon.utils";
@@ -39,6 +40,12 @@ export const AppNavigator = () => {
         component={DetailScreen}
         options={({ route }) => ({
           title: capitalize(route.params.name),
+          header: ({ navigation, options }) => (
+            <AppHeader
+              title={options.title ?? ""}
+              onBackPress={navigation.goBack}
+            />
+          ),
         })}
       />
     </Stack.Navigator>

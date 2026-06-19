@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { EmptyState } from "@/components/EmptyState/EmptyState";
 import { LoadingState } from "@/components/LoadingState/LoadingState";
 import { PokemonCard } from "@/components/PokemonCard/PokemonCard";
@@ -29,8 +29,6 @@ export const FavoritesScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{t("favorites.title")}</Text>
-
       <FlatList
         data={favorites}
         keyExtractor={(item) => String(item.id)}

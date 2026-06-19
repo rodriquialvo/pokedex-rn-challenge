@@ -1,10 +1,8 @@
-import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import { EmptyState } from "@/components/EmptyState/EmptyState";
 import { ErrorState } from "@/components/ErrorState/ErrorState";
-import { LanguageToggle } from "@/components/LanguageToggle/LanguageToggle";
 import { PokemonCard } from "@/components/PokemonCard/PokemonCard";
 import { SearchBar } from "@/components/SearchBar/SearchBar";
-import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
 import { useAppTheme } from "@/theme/useAppTheme";
 import { createHomeStyles } from "./Home.styles";
 import { useHomeController } from "./Home.controller";
@@ -53,22 +51,11 @@ export const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.headerTop}>
-          <Text style={styles.title}>{t("home.title")}</Text>
-
-          <View style={styles.headerActions}>
-            <LanguageToggle />
-            <ThemeToggle />
-          </View>
-        </View>
-
-        <SearchBar
-          value={search}
-          onChangeText={setSearch}
-          placeholder={t("home.searchPlaceholder")}
-        />
-      </View>
+      <SearchBar
+        value={search}
+        onChangeText={setSearch}
+        placeholder={t("home.searchPlaceholder")}
+      />
 
       {isEmptySearch ? (
         <EmptyState message={t("home.emptySearch")} />

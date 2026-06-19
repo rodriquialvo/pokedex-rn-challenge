@@ -12,6 +12,7 @@ export const createSearchBarStyles = (theme: AppTheme) => {
       color: theme.text,
       paddingHorizontal: 16,
       fontSize: 16,
+      marginBottom: 16
     },
   });
 };

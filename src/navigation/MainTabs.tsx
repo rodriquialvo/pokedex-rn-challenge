@@ -2,6 +2,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTranslation } from "react-i18next";
 
+import { AppHeader } from "@/components/AppHeader/AppHeader";
 import { FavoritesScreen } from "@/screens/Favorites/Favorites.screen";
 import { HomeScreen } from "@/screens/Home/Home.screen";
 import { useAppTheme } from "@/theme/useAppTheme";
@@ -16,12 +17,18 @@ export const MainTabs = () => {
   const { t } = useTranslation();
 
   return (
-    <Tab.Navigator screenOptions={createMainTabsScreenOptions(theme)}>
+    <Tab.Navigator
+      screenOptions={{
+        ...createMainTabsScreenOptions(theme),
+        headerShown: true,
+        header: ({ options }) => <AppHeader title={options.title ?? ""} />,
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          title: t("tabs.home"),
+          title: t("home.title"),
           tabBarIcon: HomeTabIcon,
         }}
       />
