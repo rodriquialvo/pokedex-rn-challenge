@@ -18,7 +18,7 @@ export default function App() {
       await SplashScreen.hideAsync();
     };
 
-    void prepare();
+    prepare();
 
     const iconTimeout = setTimeout(() => {
       setLaunchStage("splash");
