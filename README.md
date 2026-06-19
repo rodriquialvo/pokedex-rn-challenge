@@ -93,8 +93,6 @@ Run web:
 npm run web
 ```
 
-This app uses native splash screen and launcher icon configuration, so Android/iOS visual assets should be verified through native builds instead of Expo Go.
-
 ## Scripts
 
 ```sh
