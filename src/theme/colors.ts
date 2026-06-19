@@ -22,8 +22,8 @@ export const colors = {
       input: '#1E293B',
       danger: '#FCA5A5',
       success: '#86EFAC',
-      skeletonBase: '#1E293B',
-      skeletonHighlight: '#334155',
+      skeletonBase: '#334155',
+      skeletonHighlight: '#475569',
     },
   } as const;
   
