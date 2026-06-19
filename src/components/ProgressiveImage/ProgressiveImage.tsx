@@ -18,7 +18,7 @@ export const ProgressiveImage = ({
   return (
     <View style={[styles.container, containerStyle]}>
       {hasError || !source ? (
-        <Text style={styles.fallbackText}>{"fallbackText"}</Text>
+        <Text style={styles.fallbackText}>{fallbackText}</Text>
       ) : (
         <Image
           source={{ uri: source }}
@@ -26,6 +26,7 @@ export const ProgressiveImage = ({
           contentFit="contain"
           cachePolicy="disk"
           placeholder={fallbackText}
+          transition={200}
           onError={() => {
             setHasError(true);
           }}
