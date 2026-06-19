@@ -7,6 +7,7 @@ import { useFavoritesContext } from "@/context/FavoritesContext";
 import { PokemonListItem } from "@/types/pokemon.types";
 import { usePokemonList } from "@/hooks/usePokemonList";
 import { useIsRestoring } from "@tanstack/react-query";
+import { filterPokemonByName } from "@/utils/pokemon.utils";
 
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -37,15 +38,7 @@ export const useHomeController = () => {
   }, [data]);
 
   const filteredPokemons = useMemo<PokemonListItem[]>(() => {
-    const normalizedSearch = search.trim().toLowerCase();
-
-    if (!normalizedSearch) {
-      return pokemons;
-    }
-
-    return pokemons.filter((pokemon) =>
-      pokemon.name.toLowerCase().includes(normalizedSearch),
-    );
+    return filterPokemonByName(pokemons, search);
   }, [pokemons, search]);
 
   const isEmptySearch =

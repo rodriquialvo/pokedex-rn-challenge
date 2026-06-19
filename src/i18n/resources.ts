@@ -31,6 +31,8 @@ export const resources = {
       favorites: {
         title: "Favoritos",
         empty: "Todavía no agregaste Pokémon favoritos.",
+        searchPlaceholder: "Buscar favoritos...",
+        emptySearch: "No encontramos favoritos con ese nombre.",
       },
       theme: {
         light: "Modo claro",
@@ -74,6 +76,8 @@ export const resources = {
       favorites: {
         title: "Favorites",
         empty: "You have not added favorite Pokémon yet.",
+        searchPlaceholder: "Search favorites...",
+        emptySearch: "We couldn't find favorites with that name.",
       },
       theme: {
         light: "Light mode",

@@ -1,10 +1,11 @@
 import { FlatList, View } from "react-native";
 import { EmptyState } from "@/components/EmptyState/EmptyState";
-import { LoadingState } from "@/components/LoadingState/LoadingState";
 import { PokemonCard } from "@/components/PokemonCard/PokemonCard";
+import { SearchBar } from "@/components/SearchBar/SearchBar";
 import { useAppTheme } from "@/theme/useAppTheme";
 import { createFavoritesStyles } from "./Favorites.styles";
 import { useFavoritesController } from "./Favorites.controller";
+import { HomeSkeletonList } from "../Home/components/HomeSkeletonList/HomeSkeletonList";
 
 export const FavoritesScreen = () => {
   const theme = useAppTheme();
@@ -12,15 +13,18 @@ export const FavoritesScreen = () => {
 
   const {
     t,
+    search,
+    setSearch,
     favorites,
     hasFavorites,
+    isEmptySearch,
     isLoadingFavorites,
     handlePokemonPress,
     handleRemoveFavorite,
   } = useFavoritesController();
 
   if (isLoadingFavorites) {
-    return <LoadingState message={t("common.loading")} />;
+    return <HomeSkeletonList />;
   }
 
   if (!hasFavorites) {
@@ -29,30 +33,40 @@ export const FavoritesScreen = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={favorites}
-        keyExtractor={(item) => String(item.id)}
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <PokemonCard.Root onPress={() => handlePokemonPress(item)}>
-            <PokemonCard.Image
-              source={item.image}
-              fallbackText={item.name.charAt(0).toUpperCase()}
-            />
-
-            <PokemonCard.Content>
-              <PokemonCard.Number value={item.id} />
-              <PokemonCard.Title name={item.name} />
-            </PokemonCard.Content>
-
-            <PokemonCard.FavoriteButton
-              isActive
-              onPress={() => handleRemoveFavorite(item.id)}
-            />
-          </PokemonCard.Root>
-        )}
+      <SearchBar
+        value={search}
+        onChangeText={setSearch}
+        placeholder={t("favorites.searchPlaceholder")}
       />
+
+      {isEmptySearch ? (
+        <EmptyState message={t("favorites.emptySearch")} />
+      ) : (
+        <FlatList
+          data={favorites}
+          keyExtractor={(item) => String(item.id)}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <PokemonCard.Root onPress={() => handlePokemonPress(item)}>
+              <PokemonCard.Image
+                source={item.image}
+                fallbackText={item.name.charAt(0).toUpperCase()}
+              />
+
+              <PokemonCard.Content>
+                <PokemonCard.Number value={item.id} />
+                <PokemonCard.Title name={item.name} />
+              </PokemonCard.Content>
+
+              <PokemonCard.FavoriteButton
+                isActive
+                onPress={() => handleRemoveFavorite(item.id)}
+              />
+            </PokemonCard.Root>
+          )}
+        />
+      )}
     </View>
   );
 };
