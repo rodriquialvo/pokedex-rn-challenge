@@ -13,9 +13,10 @@ export const ProgressiveImage = ({
 }: ProgressiveImageProps) => {
   const theme = useAppTheme();
   const styles = createProgressiveImageStyles(theme);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-  const showFallback = isLoading || hasError || !source;
+  const [displayedSource, setDisplayedSource] = useState<string | null>(null);
+  const [failedSource, setFailedSource] = useState<string | null>(null);
+  const showFallback =
+    !source || displayedSource !== source || failedSource === source;
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -25,25 +26,21 @@ export const ProgressiveImage = ({
 
       {source ? (
         <Image
-          source={{ uri: source }}
+          source={source}
           style={[
             styles.image,
             imageStyle,
-            (isLoading || hasError) && styles.hiddenImage,
+            showFallback && styles.hiddenImage,
           ]}
           contentFit="contain"
-          cachePolicy="disk"
+          cachePolicy="memory-disk"
           transition={200}
-          onLoadStart={() => {
-            setIsLoading(true);
-            setHasError(false);
-          }}
           onDisplay={() => {
-            setIsLoading(false);
+            setDisplayedSource(source);
+            setFailedSource(null);
           }}
           onError={() => {
-            setIsLoading(false);
-            setHasError(true);
+            setFailedSource(source);
           }}
         />
       ) : null}
