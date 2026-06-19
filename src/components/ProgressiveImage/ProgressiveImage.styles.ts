@@ -10,8 +10,12 @@ export const createProgressiveImageStyles = (theme: AppTheme) => {
       backgroundColor: theme.background,
     },
     image: {
+      position: "absolute",
       width: "100%",
       height: "100%",
+    },
+    hiddenImage: {
+      opacity: 0,
     },
     fallbackText: {
       color: theme.textMuted,

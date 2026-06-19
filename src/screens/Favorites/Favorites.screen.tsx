@@ -38,7 +38,7 @@ export const FavoritesScreen = () => {
           <PokemonCard.Root onPress={() => handlePokemonPress(item)}>
             <PokemonCard.Image
               source={item.image}
-              fallbackText={String(item.id)}
+              fallbackText={item.name.charAt(0).toUpperCase()}
             />
 
             <PokemonCard.Content>

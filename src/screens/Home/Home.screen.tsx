@@ -71,7 +71,7 @@ export const HomeScreen = () => {
               <PokemonCard.Root onPress={() => handlePokemonPress(item)}>
                 <PokemonCard.Image
                   source={image}
-                  fallbackText={String(pokemonId)}
+                  fallbackText={item.name.charAt(0).toUpperCase()}
                 />
 
                 <PokemonCard.Content>
