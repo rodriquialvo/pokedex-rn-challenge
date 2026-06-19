@@ -10,10 +10,12 @@ The original challenge asks for a simple Pokedex app with an optimized list, pro
 - Infinite scroll with pull-to-refresh.
 - Search by Pokemon name within the loaded list.
 - Detail screen with artwork, types, abilities, and stats.
-- Favorites tab with persistent local storage.
+- Favorites tab with persistent local storage and real-time name filtering.
+- Shared app header with theme and language controls on every screen.
 - Light and dark themes persisted across sessions.
 - English and Spanish language toggle, initialized from the device locale.
-- Skeleton, empty, and error states.
+- Progressive images with Pokemon initials while artwork is loading or unavailable.
+- Theme-aware skeleton, empty, and error states.
 - Branded launch sequence: launcher icon, full-screen splash, then a fade into the app.
 - Unit tests for UI components and Pokemon utilities.
 
@@ -38,11 +40,11 @@ Expo SDK reference: https://docs.expo.dev/versions/v56.0.0/
 | --------------------------- | -------------------------------------------------------------------------------------------------- |
 | Optimized Pokemon list      | `FlatList` with paginated data through `useInfiniteQuery` and `onEndReached`.                      |
 | Infinite scroll             | Fetches the next PokeAPI page using the `next` URL offset.                                         |
-| Progressive image loading   | `ProgressiveImage` component and skeleton states improve perceived loading.                        |
+| Progressive image loading   | `ProgressiveImage` shows the Pokemon initial until artwork is rendered or when loading fails.      |
 | Pokemon detail              | Detail screen shows artwork, types, abilities, stats, height, weight, and base experience.         |
-| Real-time name filter       | Search input filters the currently loaded Pokemon list as the user types.                          |
+| Real-time name filter       | Shared filtering logic searches the loaded Pokemon and saved favorites lists as the user types.    |
 | Favorites management        | Pokemon can be added or removed from both list/detail flows.                                       |
-| Favorites list              | Dedicated Favorites tab shows locally saved Pokemon.                                               |
+| Favorites list              | Dedicated tab supports search and distinct empty states for no favorites and no search matches.    |
 | Offline favorites           | Favorites are persisted with AsyncStorage.                                                         |
 | Persisted list/cache        | TanStack Query cache is persisted with AsyncStorage through `PersistQueryClientProvider`.          |
 | Loading states              | Skeleton list/detail components and footer loaders.                                                |
@@ -50,7 +52,7 @@ Expo SDK reference: https://docs.expo.dev/versions/v56.0.0/
 | Testing                     | Jest tests for reusable UI components and Pokemon utility helpers.                                 |
 | Axios API client            | PokeAPI requests are centralized in `src/api`.                                                     |
 | Reusable component patterns | `PokemonCard` and `PokemonDetail` expose compound subcomponents.                                   |
-| Bonus UX                    | Light/dark theme, English/Spanish language toggle, branded launcher icon, and launch splash flow.  |
+| Bonus UX                    | A shared header exposes theme/language controls across all screens, plus a branded launch flow.    |
 
 ## Requirements
 
@@ -140,8 +142,8 @@ npm run test:ci
 
 Current coverage includes:
 
-- Empty, error, search, and favorite button UI behavior.
-- Pokemon utility helpers such as URL id parsing, official artwork URL generation, and capitalization.
+- Shared header, empty/error states, search input, and favorite button UI behavior.
+- Case-insensitive Pokemon and favorites filtering, including empty searches and no-match results.
 
 ## Native Assets
 
